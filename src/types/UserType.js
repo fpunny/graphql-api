@@ -3,11 +3,12 @@ const {
     GraphQLString,
     GraphQLNonNull,
     GraphQLID,
-    GraphQLList,
     GraphQLInt,
 } = require('graphql');
+const EthnicityEnum = require('../enums/EthnicityEnum');
 const StatusEnum = require('../enums/StatusEnum');
 const GenderEnum = require('../enums/GenderEnum');
+const SizeEnum = require('../enums/SizeEnum');
 const LinkType = require('./LinkType');
 
 module.exports = new GraphQLObjectType({
@@ -20,6 +21,9 @@ module.exports = new GraphQLObjectType({
         status: {
             type: GraphQLNonNull(StatusEnum),
         },
+        phone: {
+            type: GraphQLNonNull(GraphQLString),
+        },
         email: {
             type: GraphQLNonNull(GraphQLString),
         },
@@ -30,10 +34,31 @@ module.exports = new GraphQLObjectType({
             type: GraphQLNonNull(GraphQLString),
         },
         gender: {
-            type: GraphQLNonNull(GenderEnum),
+            type: GenderEnum,
         },
         school: {
             type: GraphQLNonNull(GraphQLString),
+        },
+        size: {
+            type: SizeEnum,
+        },
+        birthday: {
+            type: GraphQLNonNull(GraphQLInt),
+        },
+        food_restrictions: {
+            type: GraphQLNonNull(GraphQLString),
+        },
+        year_of_graduation: {
+            type: GraphQLNonNull(GraphQLInt),
+        },
+        resume: {
+            type: GraphQLNonNull(GraphQLString),
+        },
+        year_of_study: {
+            type: GraphQLNonNull(GraphQLString),
+        },
+        ethnicity: {
+            type: EthnicityEnum,
         },
         bio: {
             type: GraphQLNonNull(GraphQLString),
@@ -42,7 +67,7 @@ module.exports = new GraphQLObjectType({
             type: GraphQLNonNull(GraphQLInt),
         },
         links: {
-            type: GraphQLNonNull(GraphQLList(GraphQLNonNull(LinkType))),
+            type: GraphQLNonNull(LinkType),
         },
     },
 });

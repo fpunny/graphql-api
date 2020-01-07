@@ -1,10 +1,15 @@
 const mongoose = require('mongoose');
+const Link = require('./Link');
 
 const schema = new mongoose.Schema({
     status: {
         type: String,
         default: 'PENDING',
         enum: ['PENDING', 'WAITLISTED', 'ACCEPTED', 'DECLINED', 'REJECTED'],
+    },
+    phone: {
+        type: String,
+        default: '',
     },
     email: {
         type: String,
@@ -20,12 +25,47 @@ const schema = new mongoose.Schema({
     },
     gender: {
         type: String,
-        default: 'NONE',
-        enum: ['MALE', 'FEMALE', 'NONE'],
+        enum: ['MALE', 'FEMALE', 'OTHER'],
     },
     school: {
         type: String,
         default: '',
+    },
+    size: {
+        type: String,
+        enum: ['XS', 'S', 'M', 'L', 'XL', 'XXL'],
+    },
+    birthday: {
+        type: Date,
+        default: Date.now,
+    },
+    food_restrictions: {
+        type: String,
+        default: '',
+    },
+    year_of_graduation: {
+        type: Number,
+        default: 2020,
+    },
+    resume: {
+        type: String,
+        default: '',
+    },
+    year_of_study: {
+        type: String,
+        default: '',
+    },
+    ethnicity: {
+        type: String,
+        enum: [
+            'WHITE',
+            'BLACK',
+            'ASIAN',
+            'MIXED',
+            'HISPANIC',
+            'INDIGENOUS',
+            'OTHER',
+        ],
     },
     bio: {
         type: String,
@@ -35,18 +75,10 @@ const schema = new mongoose.Schema({
         type: Date,
         default: Date.now,
     },
-    links: [
-        {
-            name: {
-                type: String,
-                default: '',
-            },
-            href: {
-                type: String,
-                default: '',
-            },
-        },
-    ],
+    links: {
+        type: Link,
+        default: {},
+    },
     [process.env.DATABASE_SECRET]: {
         token: String,
         role: {

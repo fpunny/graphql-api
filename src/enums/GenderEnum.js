@@ -10,8 +10,8 @@ module.exports = new GraphQLEnumType({
         FEMALE: {
             value: 'FEMALE',
         },
-        NONE: {
-            value: 'NONE',
+        OTHER: {
+            value: 'OTHER',
         },
     },
 });
