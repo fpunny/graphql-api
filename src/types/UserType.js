@@ -1,6 +1,7 @@
 const {
     GraphQLObjectType,
     GraphQLString,
+    GraphQLNonNull,
     GraphQLID,
     GraphQLList,
     GraphQLInt,
@@ -14,34 +15,34 @@ module.exports = new GraphQLObjectType({
     description: 'User for Hack the Valley',
     fields: {
         _id: {
-            type: GraphQLID,
+            type: GraphQLNonNull(GraphQLID),
         },
         status: {
-            type: StatusEnum,
+            type: GraphQLNonNull(StatusEnum),
         },
         email: {
-            type: GraphQLString,
+            type: GraphQLNonNull(GraphQLString),
         },
         firstname: {
-            type: GraphQLString,
+            type: GraphQLNonNull(GraphQLString),
         },
         lastname: {
-            type: GraphQLString,
+            type: GraphQLNonNull(GraphQLString),
         },
         gender: {
-            type: GenderEnum,
+            type: GraphQLNonNull(GenderEnum),
         },
         school: {
-            type: GraphQLString,
+            type: GraphQLNonNull(GraphQLString),
         },
         bio: {
-            type: GraphQLString,
+            type: GraphQLNonNull(GraphQLString),
         },
         created_at: {
-            type: GraphQLInt,
+            type: GraphQLNonNull(GraphQLInt),
         },
         links: {
-            type: GraphQLList(LinkType),
+            type: GraphQLNonNull(GraphQLList(GraphQLNonNull(LinkType))),
         },
     },
 });

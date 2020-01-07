@@ -1,4 +1,4 @@
-const { GraphQLObjectType, GraphQLID } = require('graphql');
+const { GraphQLObjectType, GraphQLNonNull, GraphQLID } = require('graphql');
 const ResponseType = require('./ResponseType');
 const FormType = require('./FormType');
 const UserType = require('./UserType');
@@ -10,22 +10,22 @@ module.exports = new GraphQLObjectType({
     description: 'Application of a hacker',
     fields: {
         _id: {
-            type: GraphQLID,
+            type: GraphQLNonNull(GraphQLID),
         },
         form: {
-            type: FormType,
+            type: GraphQLNonNull(FormType),
             resolve: async root => {
                 return await Form.findById(root);
             },
         },
         user: {
-            type: UserType,
+            type: GraphQLNonNull(UserType),
             resolve: async root => {
                 return await User.findById(root);
             },
         },
         responses: {
-            type: ResponseType,
+            type: GraphQLNonNull(ResponseType),
         },
     },
 });

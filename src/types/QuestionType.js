@@ -1,5 +1,6 @@
 const {
     GraphQLObjectType,
+    GraphQLNonNull,
     GraphQLString,
     GraphQLID,
     GraphQLBoolean,
@@ -12,25 +13,25 @@ module.exports = new GraphQLObjectType({
     description: 'Question of a form',
     fields: {
         _id: {
-            type: GraphQLID,
+            type: GraphQLNonNull(GraphQLID),
         },
         title: {
-            type: GraphQLString,
+            type: GraphQLNonNull(GraphQLString),
         },
         info: {
-            type: GraphQLString,
+            type: GraphQLNonNull(GraphQLString),
         },
         options: {
-            type: GraphQLList(GraphQLString),
+            type: GraphQLNonNull(GraphQLList(GraphQLNonNull(GraphQLString))),
         },
         default: {
-            type: GraphQLString,
+            type: GraphQLNonNull(GraphQLString),
         },
         type: {
-            type: QuestionTypeEnum,
+            type: GraphQLNonNull(QuestionTypeEnum),
         },
         required: {
-            type: GraphQLBoolean,
+            type: GraphQLNonNull(GraphQLBoolean),
         },
     },
 });

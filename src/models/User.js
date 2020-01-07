@@ -5,25 +5,56 @@ const schema = new mongoose.Schema({
         type: String,
         default: 'PENDING',
         enum: ['PENDING', 'WAITLISTED', 'ACCEPTED', 'DECLINED', 'REJECTED'],
+        required: true,
     },
-    email: String,
-    firstname: String,
-    lastname: String,
+    email: {
+        type: String,
+        default: '',
+        required: true,
+    },
+    firstname: {
+        type: String,
+        default: '',
+        required: true,
+    },
+    lastname: {
+        type: String,
+        default: '',
+        required: true,
+    },
     gender: {
         type: String,
         default: 'NONE',
         enum: ['MALE', 'FEMALE', 'NONE'],
+        required: true,
     },
-    school: String,
-    bio: String,
+    school: {
+        type: String,
+        default: '',
+        required: true,
+    },
+    bio: {
+        type: String,
+        default: '',
+        required: true,
+    },
     created_at: {
         type: Date,
         default: Date.now,
+        required: true,
     },
     links: [
         {
-            name: String,
-            href: String,
+            name: {
+                type: String,
+                default: '',
+                required: true,
+            },
+            href: {
+                type: String,
+                default: '',
+                required: true,
+            },
         },
     ],
     [process.env.DATABASE_SECRET]: {

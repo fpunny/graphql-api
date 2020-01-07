@@ -1,6 +1,7 @@
 const {
     GraphQLObjectType,
     GraphQLString,
+    GraphQLNonNull,
     GraphQLID,
     GraphQLBoolean,
     GraphQLList,
@@ -14,13 +15,13 @@ module.exports = new GraphQLObjectType({
     description: 'Form for applications',
     fields: {
         _id: {
-            type: GraphQLID,
+            type: GraphQLNonNull(GraphQLID),
         },
         title: {
-            type: GraphQLString,
+            type: GraphQLNonNull(GraphQLString),
         },
         questions: {
-            type: GraphQLList(QuestionType),
+            type: GraphQLNonNull(GraphQLList(GraphQLNonNull(QuestionType))),
             resolve: async root => {
                 return await Question.find({
                     _id: {
@@ -30,13 +31,13 @@ module.exports = new GraphQLObjectType({
             },
         },
         open: {
-            type: GraphQLBoolean,
+            type: GraphQLNonNull(GraphQLBoolean),
         },
         ends_at: {
-            type: GraphQLInt,
+            type: GraphQLNonNull(GraphQLInt),
         },
         created_at: {
-            type: GraphQLInt,
+            type: GraphQLNonNull(GraphQLInt),
         },
     },
 });

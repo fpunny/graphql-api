@@ -51,18 +51,19 @@ router.get('/', async (req, res, next) => {
 });
 
 router.get('/callback', passport.authenticate('google'), async (req, res) => {
-    const { token } = req.user[process.env.DATABASE_SECRET];
+    const token = req.user[process.env.DATABASE_SECRET].token;
     const { state } = req.query;
+    const id = req.user._id;
 
     if (state) {
         if (
             process.env.NODE_ENV === 'development' ||
             state.startsWith(process.env.DOMAIN)
         ) {
-            return res.redirect(`${state}?token=${token}`);
+            return res.redirect(`${state}?token=${token}&id=${id}`);
         }
     }
-    res.json({ token });
+    res.json({ token, id });
 });
 
 module.exports = router;
