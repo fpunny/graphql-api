@@ -1,13 +1,13 @@
-const { GraphQLInputObjectType, GraphQLString } = require("graphql")
+const { GraphQLInputObjectType, GraphQLString } = require('graphql');
 
 module.exports = new GraphQLInputObjectType({
-  name: "LinkInput",
-  fields: {
-    name: {
-      type: GraphQLString,
+    name: 'LinkInput',
+    fields: {
+        name: {
+            type: GraphQLString,
+        },
+        href: {
+            type: GraphQLString,
+        },
     },
-    href: {
-      type: GraphQLString,
-    },
-  },
-})
+});

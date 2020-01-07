@@ -1,7 +1,7 @@
-const getApplication = require("./getApplication")
-const getApplications = require("./getApplications")
+const getApplication = require('./getApplication');
+const getApplications = require('./getApplications');
 
 module.exports = {
-  getApplications,
-  getApplication,
-}
+    getApplications,
+    getApplication,
+};
