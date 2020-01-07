@@ -1,10 +1,13 @@
 const {
     GraphQLInputObjectType,
-    GraphQLList,
     GraphQLString,
+    GraphQLInt,
 } = require('graphql');
+const EthnicityEnum = require('../../enums/EthnicityEnum');
 const StatusEnum = require('../../enums/StatusEnum');
 const GenderEnum = require('../../enums/GenderEnum');
+const DateScalar = require('../../types/DateScalar');
+const SizeEnum = require('../../enums/SizeEnum');
 const LinkInput = require('./LinkInput');
 
 module.exports = new GraphQLInputObjectType({
@@ -12,6 +15,9 @@ module.exports = new GraphQLInputObjectType({
     fields: {
         status: {
             type: StatusEnum,
+        },
+        phone: {
+            type: GraphQLString,
         },
         email: {
             type: GraphQLString,
@@ -28,11 +34,32 @@ module.exports = new GraphQLInputObjectType({
         school: {
             type: GraphQLString,
         },
+        size: {
+            type: SizeEnum,
+        },
+        birthday: {
+            type: DateScalar,
+        },
+        food_restrictions: {
+            type: GraphQLString,
+        },
+        year_of_graduation: {
+            type: GraphQLInt,
+        },
+        resume: {
+            type: GraphQLString,
+        },
+        year_of_study: {
+            type: GraphQLString,
+        },
+        ethnicity: {
+            type: EthnicityEnum,
+        },
         bio: {
             type: GraphQLString,
         },
         links: {
-            type: GraphQLList(LinkInput),
+            type: LinkInput,
         },
     },
 });
