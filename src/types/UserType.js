@@ -9,6 +9,7 @@ const EthnicityEnum = require('../enums/EthnicityEnum');
 const StatusEnum = require('../enums/StatusEnum');
 const GenderEnum = require('../enums/GenderEnum');
 const SizeEnum = require('../enums/SizeEnum');
+const DateScalar = require('./DateScalar');
 const LinkType = require('./LinkType');
 
 module.exports = new GraphQLObjectType({
@@ -43,7 +44,7 @@ module.exports = new GraphQLObjectType({
             type: SizeEnum,
         },
         birthday: {
-            type: GraphQLNonNull(GraphQLInt),
+            type: GraphQLNonNull(DateScalar),
         },
         food_restrictions: {
             type: GraphQLNonNull(GraphQLString),
