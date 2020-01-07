@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-module.exports = new mongoose.Schema({
+module.exports = {
     linkedin: {
         type: String,
         default: '',
@@ -17,4 +17,4 @@ module.exports = new mongoose.Schema({
         type: String,
         default: '',
     },
-});
+};

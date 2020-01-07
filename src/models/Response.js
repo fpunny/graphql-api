@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-module.exports = new mongoose.Schema({
+module.exports = {
     question: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Question',
@@ -11,4 +11,4 @@ module.exports = new mongoose.Schema({
             default: '',
         },
     ],
-});
+};

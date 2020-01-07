@@ -75,10 +75,7 @@ const schema = new mongoose.Schema({
         type: Date,
         default: Date.now,
     },
-    links: {
-        type: Link,
-        default: {},
-    },
+    links: Link,
     [process.env.DATABASE_SECRET]: {
         token: String,
         role: {
