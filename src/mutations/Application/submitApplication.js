@@ -9,19 +9,23 @@ module.exports = {
             type: GraphQLNonNull(GraphQLID),
         },
     },
-    description: 'Create a new application',
+    description: 'Submit an application',
     resolve: authenticated(async (root, args, context) => {
-        if (getRole(context) === 'HACKER') {
-            throw new Error('Permission denied');
-        }
+        const app = await Application.findById(args._id);
 
-        if (app.submitted && getRole(context) !== 'ADMIN') {
+        if (app.submitted) {
             throw new Error('Application is already submitted');
         }
 
-        const app = await Application.findOneAndDelete({
-            _id: args._id,
-        });
-        return app !== null;
+        if (
+            getRole(context) === 'HACKER' &&
+            app.user !== context.user._id &&
+            getRole(context) !== 'ADMIN'
+        ) {
+            throw new Error('Permission denied');
+        }
+
+        app.submitted = true;
+        return (await app.save()) !== null;
     }),
 };

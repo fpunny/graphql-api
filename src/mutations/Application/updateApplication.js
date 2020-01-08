@@ -22,6 +22,10 @@ module.exports = {
             throw new Error('Permission denied');
         }
 
+        if (app.submitted && getRole(context) !== 'ADMIN') {
+            throw new Error('Application is already submitted');
+        }
+
         const questions = app.responses.reduce((acc, curr, index) => {
             acc[curr.question] = index;
         }, {});

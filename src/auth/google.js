@@ -4,6 +4,8 @@ const express = require('express');
 const crypto = require('crypto');
 const router = express.Router();
 
+const isDevelopment = process.env.NODE_ENV === 'development';
+const whitelist = require('./whitelist');
 const User = require('../models/User');
 
 passport.use(
@@ -12,9 +14,7 @@ passport.use(
             clientID: process.env.GOOGLE_CLIENT,
             clientSecret: process.env.GOOGLE_SECRET,
             callbackURL: `${
-                process.env.NODE_ENV === 'development'
-                    ? 'http://lvh.me'
-                    : process.env.DOMAIN
+                isDevelopment ? 'http://lvh.me' : whitelist[0]
             }/auth/google/callback`,
         },
         async (accessToken, refreshToken, profile, done) => {
@@ -52,14 +52,13 @@ router.get('/', async (req, res, next) => {
 
 router.get('/callback', passport.authenticate('google'), async (req, res) => {
     const token = req.user[process.env.DATABASE_SECRET].token;
+    const isAuthDomain = whitelist.find(domain => state.startsWith(domain));
     const { state } = req.query;
     const id = req.user._id;
 
     if (state) {
-        if (
-            process.env.NODE_ENV === 'development' ||
-            state.startsWith(process.env.DOMAIN)
-        ) {
+        const domain = whitelist.find(domain => state.startsWith(domain));
+        if (isDevelopment || domain) {
             return res.redirect(`${state}?token=${token}&id=${id}`);
         }
     }

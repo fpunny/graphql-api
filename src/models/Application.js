@@ -11,6 +11,10 @@ const schema = new mongoose.Schema({
         ref: 'User',
     },
     responses: [Response],
+    submitted: {
+        type: Boolean,
+        default: false,
+    },
 });
 
 module.exports = mongoose.model('Application', schema);

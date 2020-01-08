@@ -1,4 +1,9 @@
-const { GraphQLObjectType, GraphQLNonNull, GraphQLID } = require('graphql');
+const {
+    GraphQLObjectType,
+    GraphQLBoolean,
+    GraphQLNonNull,
+    GraphQLID,
+} = require('graphql');
 const ResponseType = require('./ResponseType');
 const FormType = require('./FormType');
 const UserType = require('./UserType');
@@ -26,6 +31,9 @@ module.exports = new GraphQLObjectType({
         },
         responses: {
             type: GraphQLNonNull(ResponseType),
+        },
+        submitted: {
+            type: GraphQLNonNull(GraphQLBoolean),
         },
     },
 });
