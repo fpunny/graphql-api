@@ -20,10 +20,15 @@ module.exports = {
             throw new Error('Permission denied');
         }
 
-        const form = await Form.getById(args.formId);
+        const form = await Form.findById(args.formId);
         const index = form.questions.findIndex(
-            ({ _id }) => args.questionId === _id,
+            question => args.questionId === question.toString(),
         );
+
+        if (index === -1) {
+            throw new Error('Question not found');
+        }
+
         form.questions.splice(index, 1);
         await form.save();
 

@@ -2,6 +2,7 @@ const {
     GraphQLObjectType,
     GraphQLBoolean,
     GraphQLNonNull,
+    GraphQLList,
     GraphQLID,
 } = require('graphql');
 const ResponseType = require('./ResponseType');
@@ -20,17 +21,17 @@ module.exports = new GraphQLObjectType({
         form: {
             type: GraphQLNonNull(FormType),
             resolve: async root => {
-                return await Form.findById(root);
+                return await Form.findById(root.form);
             },
         },
         user: {
             type: GraphQLNonNull(UserType),
             resolve: async root => {
-                return await User.findById(root);
+                return await User.findById(root.user);
             },
         },
         responses: {
-            type: GraphQLNonNull(ResponseType),
+            type: GraphQLNonNull(GraphQLList(GraphQLNonNull(ResponseType))),
         },
         submitted: {
             type: GraphQLNonNull(GraphQLBoolean),

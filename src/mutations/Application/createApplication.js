@@ -2,6 +2,7 @@ const { GraphQLNonNull, GraphQLID } = require('graphql');
 const ApplicationType = require('../../types/ApplicationType');
 const authenticated = require('../../utils/authenticated');
 const Application = require('../../models/Application');
+const getRole = require('../../utils/getRole');
 const Form = require('../../models/Form');
 
 module.exports = {
@@ -31,6 +32,6 @@ module.exports = {
             form: form._id,
             responses,
             user,
-        });
+        }).save();
     }),
 };

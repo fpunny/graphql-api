@@ -25,7 +25,7 @@ module.exports = {
         const question = await new Question(args.question);
         await question.save();
 
-        const form = await Form.getById(args.formId);
+        const form = await Form.findById(args.formId);
         form.questions.push(question._id);
         await form.save();
 

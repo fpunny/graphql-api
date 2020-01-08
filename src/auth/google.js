@@ -22,7 +22,7 @@ passport.use(
             let user = await User.findOne({ email });
 
             if (!user) {
-                user = await new User({
+                user = new User({
                     firstname: profile.name.givenName,
                     lastname: profile.name.familyName,
                     email,

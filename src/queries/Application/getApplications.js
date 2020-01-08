@@ -1,11 +1,11 @@
-const { GraphQLID } = require('graphql');
+const { GraphQLList, GraphQLID } = require('graphql');
 const ApplicationType = require('../../types/ApplicationType');
 const authenticated = require('../../utils/authenticated');
 const Application = require('../../models/Application');
 const getRole = require('../../utils/getRole');
 
 module.exports = {
-    type: ApplicationType,
+    type: GraphQLList(ApplicationType),
     args: {
         userId: {
             type: GraphQLID,

@@ -9,6 +9,7 @@ const {
 } = require('graphql');
 const QuestionType = require('./QuestionType');
 const Question = require('../models/Question');
+const DateScalar = require('./DateScalar');
 
 module.exports = new GraphQLObjectType({
     name: 'Form',
@@ -25,7 +26,7 @@ module.exports = new GraphQLObjectType({
             resolve: async root => {
                 return await Question.find({
                     _id: {
-                        $in: root,
+                        $in: root.questions,
                     },
                 });
             },
@@ -34,10 +35,10 @@ module.exports = new GraphQLObjectType({
             type: GraphQLNonNull(GraphQLBoolean),
         },
         ends_at: {
-            type: GraphQLNonNull(GraphQLInt),
+            type: GraphQLNonNull(DateScalar),
         },
         created_at: {
-            type: GraphQLNonNull(GraphQLInt),
+            type: GraphQLNonNull(DateScalar),
         },
     },
 });

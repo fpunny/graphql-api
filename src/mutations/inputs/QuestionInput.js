@@ -11,9 +11,6 @@ const QuestionTypeEnum = require('../../enums/QuestionTypeEnum');
 module.exports = new GraphQLInputObjectType({
     name: 'QuestionInput',
     fields: {
-        _id: {
-            type: GraphQLNonNull(GraphQLID),
-        },
         title: {
             type: GraphQLString,
         },
