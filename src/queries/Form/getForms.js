@@ -6,7 +6,7 @@ const Form = require('../../models/Form');
 module.exports = {
     type: FormType,
     description: 'Get information of a list of forms',
-    resolve: authenticated(async () => {
+    resolve: authenticated(async (root, args, context) => {
         return await Form.find(
             Object.assign(
                 {},
