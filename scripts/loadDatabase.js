@@ -32,12 +32,17 @@ interface.on('line', async line => {
         .digest('hex')
     ;
 
-    new User({
-        firstname: data[1],
-        lastname: data[2],
-        email: data[4],
-        [process.env.DATABASE_SECRET]: {
-            token,
-        },
-    }).save();
+    try {
+        new User({
+            firstname: data[1],
+            lastname: data[2],
+            email: data[4],
+            [process.env.DATABASE_SECRET]: {
+                token,
+            },
+        }).save();
+        console.log(`Hacker ${ data[4] } added.`)
+    } catch (err) {
+        console.log(`Error on ${ data[4] }, `, err);
+    }
 });
