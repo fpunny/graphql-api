@@ -7,7 +7,6 @@ require('dotenv').config();
 
 const User = require('./models/User');
 const schema = require('./schema');
-// const auth = require('./auth');
 const app = express();
 
 mongoose.connect(process.env.DATABASE, {
@@ -34,7 +33,7 @@ app.use(
 );
 
 if (process.env.NODE_ENV === 'development') {
-    app.use('/auth', auth);
+    app.use('/auth', require('./auth'));
     app.get(
         '/playground',
         playground({
