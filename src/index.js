@@ -7,7 +7,7 @@ require('dotenv').config();
 
 const User = require('./models/User');
 const schema = require('./schema');
-const auth = require('./auth');
+// const auth = require('./auth');
 const app = express();
 
 mongoose.connect(process.env.DATABASE, {
@@ -17,7 +17,6 @@ mongoose.connect(process.env.DATABASE, {
 });
 
 app.use(cors());
-app.use('/auth', auth);
 app.use(
     '/graphql',
     async (req, res, next) => {
@@ -34,12 +33,15 @@ app.use(
     })),
 );
 
-app.get(
-    '/playground',
-    playground({
-        endpoint: '/graphql',
-    }),
-);
+if (process.env.NODE_ENV === 'development') {
+    app.use('/auth', auth);
+    app.get(
+        '/playground',
+        playground({
+            endpoint: '/graphql',
+        }),
+    );
+}
 
 app.listen(process.env.PORT, () => {
     console.log(`Server running on port ${process.env.PORT}`);

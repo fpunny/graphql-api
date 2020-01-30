@@ -52,13 +52,12 @@ router.get('/', async (req, res, next) => {
 
 router.get('/callback', passport.authenticate('google'), async (req, res) => {
     const token = req.user[process.env.DATABASE_SECRET].token;
-    const isAuthDomain = whitelist.find(domain => state.startsWith(domain));
     const { state } = req.query;
     const id = req.user._id;
 
     if (state) {
-        const domain = whitelist.find(domain => state.startsWith(domain));
-        if (isDevelopment || domain) {
+        const isAuthDomain = whitelist.find(domain => state.startsWith(domain));
+        if (isDevelopment || isAuthDomain) {
             return res.redirect(`${state}?token=${token}&id=${id}`);
         }
     }
