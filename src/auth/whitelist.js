@@ -1,6 +1,6 @@
 const whitelist = [
-    'https://www.api.hackthevalley.io',
     'https://api.hackthevalley.io',
+    'https://www.api.hackthevalley.io',
 ];
 
 module.exports =
