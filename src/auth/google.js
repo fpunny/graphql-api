@@ -13,9 +13,7 @@ passport.use(
         {
             clientID: process.env.GOOGLE_CLIENT,
             clientSecret: process.env.GOOGLE_SECRET,
-            callbackURL: `${
-                isDevelopment ? 'http://lvh.me' : whitelist[0]
-            }/auth/google/callback`,
+            callbackURL: `${whitelist[0]}/auth/google/callback`,
         },
         async (accessToken, refreshToken, profile, done) => {
             const email = profile.emails[0].value;
@@ -57,7 +55,7 @@ router.get('/callback', passport.authenticate('google'), async (req, res) => {
 
     if (state) {
         const isAuthDomain = whitelist.find(domain => state.startsWith(domain));
-        if (isDevelopment || isAuthDomain) {
+        if (isAuthDomain) {
             return res.redirect(`${state}?token=${token}&id=${id}`);
         }
     }
