@@ -32,14 +32,15 @@ app.use(
     })),
 );
 
+app.get(
+    '/playground',
+    playground({
+        endpoint: '/graphql',
+    }),
+);
+
 if (process.env.NODE_ENV === 'development') {
     app.use('/auth', require('./auth'));
-    app.get(
-        '/playground',
-        playground({
-            endpoint: '/graphql',
-        }),
-    );
 }
 
 app.listen(process.env.PORT, () => {
