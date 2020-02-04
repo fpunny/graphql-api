@@ -4,7 +4,6 @@ const crypto = require('crypto');
 const fs = require('fs');
 require('dotenv').config();
 
-const hash = crypto.createHmac('sha512', process.env.DATABASE_KEY);
 const DATA = process.env.DATA_PATH + '/apps.csv';
 const User = require('../src/models/User');
 const interface = readline.createInterface({
@@ -27,6 +26,7 @@ interface.on('line', async line => {
     }
 
     const data = line.split(',');
+    const hash = crypto.createHmac('sha512', process.env.DATABASE_KEY);
     const token = hash
         .update(crypto.randomBytes(20).toString('hex'))
         .digest('hex')

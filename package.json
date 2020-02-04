@@ -8,7 +8,8 @@
     "start": "node src/index.js",
     "lint": "prettier --write 'src/**/*.js'",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "load": "node scripts/loadDatabase.js"
+    "load": "node scripts/loadDatabase.js",
+    "patch": "node scripts/patchDatabase.js"
   },
   "author": "",
   "license": "ISC",
@@ -21,7 +22,7 @@
     "express-graphql": "^0.9.0",
     "graphql": "^14.6.0",
     "graphql-playground-middleware-express": "^1.7.12",
-    "mongoose": "^5.8.10",
+    "mongoose": "^5.8.11",
     "passport": "^0.4.1",
     "passport-google-oauth": "^2.0.0"
   },
