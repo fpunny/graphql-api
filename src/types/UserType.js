@@ -65,7 +65,7 @@ module.exports = new GraphQLObjectType({
             type: GraphQLNonNull(GraphQLString),
         },
         created_at: {
-            type: GraphQLNonNull(GraphQLInt),
+            type: GraphQLNonNull(DateScalar),
         },
         links: {
             type: GraphQLNonNull(LinkType),
