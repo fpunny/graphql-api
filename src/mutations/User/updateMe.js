@@ -13,6 +13,9 @@ module.exports = {
     },
     description: 'Update session user information',
     resolve: authenticated(async (root, args, context) => {
+        if (getRole(context) === 'HACKER') {
+            throw new Error('Permission denied');
+        }
         return await User.findByIdAndUpdate(context.user._id, args.user, {
             new: true,
         });
